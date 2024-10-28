@@ -1,0 +1,27 @@
+
+   <!-- src/app/pages/add-address/add-address.component.html -->
+<div class="address-form-container">
+    <h3>Select a Delivery Address</h3>
+    <div *ngIf="getUserAddress.length > 0">
+      <div *ngFor="let addr of getUserAddress; let i = index" class="user-address-item">
+        <input type="radio" name="selectedAddress" [value]="i" (change)="handleAddressSelect(addr)" />
+        <label>{{ addr.street }}, {{ addr.city }}, {{ addr.state }}, {{ addr.country }} - {{ addr.postalCode }}</label>
+        <button class="delete-address-btn" (click)="handleDeleteAddress(i)">Delete</button>
+      </div>
+    </div>
+  
+    <h3>Add a New Address</h3>
+    <form (ngSubmit)="handleSubmit()" class="address-form">
+      <input type="text" name="street" [(ngModel)]="address.street" placeholder="Street" required />
+      <input type="text" name="city" [(ngModel)]="address.city" placeholder="City" required />
+      <input type="text" name="postalCode" [(ngModel)]="address.postalCode" placeholder="Postal Code" required />
+      <input type="text" name="state" [(ngModel)]="address.state" placeholder="State" required />
+      <input type="text" name="country" [(ngModel)]="address.country" placeholder="Country" required />
+      <button type="submit" class="submit-address-btn">Submit Address</button>
+    </form>
+  
+    <button class="proceed-to-pay" [disabled]="!userDeliveryAddress" (click)="handleProceedToPay()">
+      Proceed to Pay
+    </button>
+  </div>
+  

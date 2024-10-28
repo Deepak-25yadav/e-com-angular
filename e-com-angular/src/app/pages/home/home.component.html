@@ -1,0 +1,86 @@
+
+
+<!-- src/app/pages/home/home.component.html -->
+
+<div class="home-container">
+  <h1>All Products</h1>
+
+  <input
+    type="text"
+    placeholder="Search products..."
+    [(ngModel)]="searchQuery"
+    (input)="handleSearchChange($event)"
+    class="search-input"
+  />
+
+  <div class="sub-home-container">
+    <div class="sidebar">
+      <div>
+        <p>Category</p>
+        <div class="filter-group" *ngFor="let category of ['T-Shirts', 'Shoes', 'Hoodies', 'Jackets', 'Dresses']">
+          <input
+            type="checkbox"
+            [value]="category"
+            (change)="handleCategoryChange($event)"
+          />
+          <label>{{ category }}</label>
+        </div>
+      </div>
+      <div>
+        <p>Sort by Price</p>
+        <div class="filter-group">
+          <input type="radio" name="price" value="lowToHigh" (change)="handlePriceSortChange($event)" />
+          <label>Low to High</label>
+        </div>
+        <div class="filter-group">
+          <input type="radio" name="price" value="highToLow" (change)="handlePriceSortChange($event)" />
+          <label>High to Low</label>
+        </div>
+      </div>
+    </div>
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let product of products">
+        <img [src]="product.images[0]" [alt]="product.title" class="product-image" />
+        <div class="product-details">
+          <h2>{{ product.title }}</h2>
+          <p>{{ product.description }}</p>
+          <p>Category: {{ product.category }}</p>
+          <p>Brand: {{ product.brand }}</p>
+          <p>Color: {{ product.color }}</p>
+          <p class="product-price">₹{{ product.price }}</p>
+          <!-- <p>Stock: {{ product.stock }}</p> -->
+
+          <p *ngIf="product.stock === 0" style="color: red;">Product is unavailable</p>
+          <p *ngIf="product.stock > 0 && product.stock <= 10" style="color: #ff5722;">Only {{ product.stock }} Left!</p>
+
+          <button
+            [ngStyle]="{
+              backgroundColor: isProductInCart(product._id)
+                ? 'green'
+                : product.stock === 0
+                ? 'lightblue'
+                : product.stock > 0 && product.stock <= 10
+                ? 'darkblue'
+                : 'blue'
+            }"
+            class="buy-now-btn"
+            (click)="isProductInCart(product._id) ? navigateToCart() : handleAddToCart(product)"
+            [disabled]="!isProductInCart(product._id) && product.stock === 0"
+          >
+            {{ isProductInCart(product._id) ? 'Go to Cart' : 'Add to Cart' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagination">
+    <button (click)="handlePageChange(page - 1)" [disabled]="page === 1">Previous</button>
+    <span>Page {{ page }}</span>
+    <button (click)="handlePageChange(page + 1)">Next</button>
+  </div>
+</div>
+
+
+
+
+

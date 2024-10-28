@@ -1,0 +1,114 @@
+
+
+
+/* Container for login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+  }
+  
+  /* Card styling for the login form */
+  .login-card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: right;
+    width: 320px; 
+  }
+  
+  .toggle-password{
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .logo {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  /* Input groups styling */
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-group > input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #777;
+  }
+  
+  /* Styling for the password input with the eye icon */
+  .password-container {
+    position: relative;
+  }
+  
+  .password-toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+  }
+  
+  /* Login button styling */
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(90deg, #7f00ff, #e100ff);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background: linear-gradient(90deg, #6c00e6, #c800e6);
+  }
+  
+  .signup-redirect {
+    margin-top: 20px;
+    color: #555;
+  }
+  
+  .signup-link {
+    color: #7f00ff;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .signup-link:hover {
+    color: #e100ff;
+  }
+  
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+  }
+  

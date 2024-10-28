@@ -1,0 +1,96 @@
+
+/* Navbar Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #6200ea, #3700b3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.navbar .logo a {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    transition: color 0.3s ease;
+}
+
+.navbar .logo a:hover {
+    color: #ffd700;
+}
+
+/* Links Styling */
+.navbar .nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+/* Individual Link Styling */
+.navbar .nav-links a {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.navbar .nav-links a:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logout-button {
+    background-color: #ff1744;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #d50000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+    }
+
+    .navbar .nav-links {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .navbar .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        margin: 5px 0;
+    }
+
+    .logout-button {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+}

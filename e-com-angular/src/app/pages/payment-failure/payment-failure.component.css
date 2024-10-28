@@ -1,0 +1,45 @@
+
+.payment-failure-container {
+    text-align: center;
+    padding: 2rem;
+    background-color: #ffe6e6;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .failure-icon {
+    font-size: 60px;
+    color: #dc3545;
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    color: #dc3545;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: #555;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .failure-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .failure-btn:hover {
+    background-color: #c82333;
+  }
+  

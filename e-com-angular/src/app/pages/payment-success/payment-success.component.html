@@ -1,0 +1,12 @@
+
+   <div class="payment-success-container">
+    <div class="success-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <h2>Payment Successful!</h2>
+    <p>Your transaction was completed successfully.</p>
+    <button class="success-btn" (click)="goToDashboard()" [disabled]="loading">
+      {{ loading ? 'Processing...' : 'Shop More' }}
+    </button>
+  </div>
+  

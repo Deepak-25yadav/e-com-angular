@@ -1,0 +1,76 @@
+
+
+ <div class="cart-container">
+  <h2 class="cart-title">Your Shopping Cart</h2>
+
+  <div *ngIf="isLoading">Loading cart...</div>
+  <div *ngIf="!isLoading && availableItems.length === 0 && notAvailableItems.length === 0" class="empty-cart-message">
+    Your cart is empty.
+  </div>
+
+  <div *ngIf="availableItems.length > 0">
+    <h3 class="cart-subtitle" style="color: green;">Available Items in Seller Stock</h3>
+    <ul class="cart-items">
+      <li *ngFor="let item of availableItems" class="cart-item">
+        <div class="cart-item-info">
+          <img [src]="item.product.images[0]" [alt]="item.product.title" class="cart-item-image" />
+          <div>
+            <h4>{{ item.product.title }}</h4>
+            <p>Price: ₹{{ item.product.price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Stock: {{ item.product.stock }}</p>
+          </div>
+        </div>
+        <div class="cart-item-actions">
+          <button
+            class="quantity-btn decrease-btn"
+            (click)="updateQuantity(item.product._id, 'decrease')"
+            [disabled]="item.quantity === 1"
+          >
+            -
+          </button>
+          <span class="quantity-display">{{ item.quantity }}</span>
+          <button class="quantity-btn increase-btn" (click)="updateQuantity(item.product._id, 'increase')">
+            +
+          </button>
+          <button class="remove-btn" (click)="removeProduct(item.product._id)">Remove</button>
+        </div>
+      </li>
+    </ul>
+
+    <hr class="cart-divider" />
+
+    <div class="checkout-section">
+      <p>Total Price: ₹{{ totalPrice }}</p>
+      <p>Total Quantity: {{ calculateTotalQuantity() }}</p>
+      <button (click)="proceedToCheckout()">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <div *ngIf="notAvailableItems.length > 0">
+    <h3 class="cart-subtitle" style="color: red;">Not Available Items in Seller Stock</h3>
+    <ul class="cart-items">
+      <li *ngFor="let item of notAvailableItems" class="cart-item">
+        <div class="cart-item-info">
+          <img [src]="item.product.images[0]" [alt]="item.product.title" class="cart-item-image" />
+          <div>
+            <h4>{{ item.product.title }}</h4>
+            <p>Price: ₹{{ item.product.price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Stock: {{ item.product.stock }}</p>
+          </div>
+        </div>
+        <div class="cart-item-actions">
+          <button class="quantity-btn decrease-btn" disabled>-</button>
+          <span class="quantity-display">{{ item.quantity }}</span>
+          <button class="quantity-btn increase-btn" disabled>+</button>
+          <button class="remove-btn" (click)="removeProduct(item.product._id)">Remove</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+

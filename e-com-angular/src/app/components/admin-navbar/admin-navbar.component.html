@@ -1,0 +1,15 @@
+
+  <nav class="navbar">
+    <div class="logo">
+      <a routerLink="/all-products">Fashion-Zone</a>
+    </div>
+    <div class="nav-links">
+      <a routerLink="/all-products">All Products</a>
+      <a routerLink="/create-product">Create Product</a>
+      <a routerLink="/admin-order-history">Admin Order History</a>
+  
+      <button *ngIf="isAuthenticated" (click)="handleLogout()" class="logout-button">Logout</button>
+      <a *ngIf="!isAuthenticated" routerLink="/login">Login</a>
+    </div>
+  </nav>
+  

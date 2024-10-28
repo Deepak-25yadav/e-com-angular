@@ -1,0 +1,55 @@
+
+
+   <div class="create-product-container">
+    <h2>Create New Product</h2>
+    <p *ngIf="error" class="error-message">{{ error }}</p>
+    <p *ngIf="success" class="success-message">{{ success }}</p>
+  
+    <form (ngSubmit)="handleSubmit()" class="product-form">
+      <div class="input-group" *ngFor="let field of ['title', 'description', 'price', 'images', 'stock', 'category', 'brand', 'color', 'discount']">
+        <label>{{ field | titlecase }}</label>
+        <input
+          *ngIf="field !== 'description'"
+          type="text"
+          [name]="field"
+          [(ngModel)]="formData[field]"
+          required
+          (input)="handleChange($event, field)"
+        />
+        <textarea
+          *ngIf="field === 'description'"
+          [name]="field"
+          [(ngModel)]="formData.description"
+          required
+          (input)="handleChange($event, field)"
+        ></textarea>
+      </div>
+  
+      <div class="input-group">
+        <label>Size</label>
+        <select [(ngModel)]="formData.size" name="size">
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+        </select>
+      </div>
+  
+      <div class="input-group">
+        <label>Gender</label>
+        <select [(ngModel)]="formData.gender" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="boy">Boy</option>
+          <option value="girl">Girl</option>
+        </select>
+      </div>
+  
+      <button type="submit" class="create-button">Create Product</button>
+    </form>
+  </div>
+  
+
+

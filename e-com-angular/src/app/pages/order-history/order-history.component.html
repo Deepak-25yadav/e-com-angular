@@ -1,0 +1,52 @@
+
+
+<div class="order-history-container">
+    <h2>Your Order History</h2>
+  
+    <!-- Loading state -->
+    <div *ngIf="loading" class="loading">Loading order history...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+    <div *ngIf="!loading && orders.length === 0" class="no-orders">No orders found.</div>
+  
+    <!-- Display order cards if there are orders -->
+    <div *ngIf="!loading && orders.length > 0">
+      <div *ngFor="let order of orders" class="order-card">
+        <h3>Order Date: {{ order.orderDate | date: 'shortDate' }}</h3>
+        <h4>
+          <strong>Total Price:</strong> ₹ {{ calculateTotalPrice(order.products) }}
+        </h4>
+  
+        <!-- Display the order address if it exists -->
+        <div *ngIf="order.address && hasAddress(order.address)" class="order-address">
+          <p>
+            <strong>Delivery Address: </strong>
+            {{ order.address.street }}, {{ order.address.city }},
+            {{ order.address.state }}, {{ order.address.postalCode }},
+            {{ order.address.country }}
+          </p>
+        </div>
+        <p *ngIf="!order.address || !hasAddress(order.address)">Delivery Address Not Added</p>
+  
+        <!-- Display products in the order -->
+        <div class="products-list">
+          <div *ngFor="let item of order.products" class="product-card">
+            <img
+              *ngIf="item?.product?.images?.[0]"
+              [src]="item.product.images[0]"
+              alt="{{ item?.product?.title || 'Product Image' }}"
+              class="product-image"
+            />
+            <div class="product-info">
+              <h4>{{ item?.product?.title || 'No Title' }}</h4>
+              <p>{{ item?.product?.description || 'No Description' }}</p>
+              <p><strong>Price:</strong> ₹{{ item?.product?.price || 'N/A' }}</p>
+              <p><strong>Quantity:</strong> {{ item?.quantity || 'N/A' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+

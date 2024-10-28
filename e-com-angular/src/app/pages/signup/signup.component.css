@@ -1,0 +1,107 @@
+
+
+.signup-container {
+    width: 100%;
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 40px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .signup-container h2 {
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signup-form .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .signup-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .signup-form input:focus {
+    border-color: #6200ea;
+    box-shadow: 0px 0px 5px rgba(98, 0, 234, 0.5);
+  }
+  
+  .radio-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .radio-group label {
+    display: inline-block;
+    margin-right: 15px;
+    color: #555;
+    font-size: 14px;
+  }
+  
+  .radio-group input {
+    margin-right: 5px;
+  }
+  
+  .signup-form button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-form button:hover {
+    background-color: #3700b3;
+  }
+  
+  .login-redirect {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .login-redirect a {
+    color: #6200ea;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .login-redirect a:hover {
+    color: #3700b3;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  
+  
+  .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 15px; /* Adjust based on your design */
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+  }
+  

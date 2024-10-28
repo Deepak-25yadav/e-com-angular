@@ -1,0 +1,55 @@
+  
+
+
+   <div class="admin-order-history-container" *ngIf="loading">
+    Loading order history...
+  </div>
+  
+  <div class="admin-order-history-container" *ngIf="error">
+    {{ error }}
+  </div>
+  
+  <div class="admin-order-history-container" *ngIf="!loading && !error">
+    <h2>Admin Order History</h2>
+    <div *ngIf="orders.length === 0">
+      No orders found.
+    </div>
+  
+    <div *ngFor="let order of orders" class="order-card">
+      <h3>Order Date: {{ order.orderDate | date: 'mediumDate' }}</h3>
+      <div class="total-price">
+        <h4>
+          <strong>Total Price:</strong> ₹ {{ getTotalPrice(order.products) }}
+        </h4>
+      </div>
+  
+      <div class="user-info">
+        <p><strong>User:</strong> {{ order.user.firstName }} {{ order.user.lastName }}</p>
+        <p><strong>Email:</strong> {{ order.user.email }}</p>
+        <p><strong>Mobile:</strong> {{ order.user.mobile }}</p>
+      </div>
+  
+      <div class="address-info">
+        <h5>Delivery Address:</h5>
+        <p *ngIf="order.address">
+          {{ order.address.street }}, {{ order.address.city }}, {{ order.address.state }},
+          {{ order.address.postalCode }}, {{ order.address.country }}
+        </p>
+        <p *ngIf="!order.address">No address available.</p>
+      </div>
+  
+      <div class="products-list">
+        <div *ngFor="let item of order.products" class="product-card">
+          <img [src]="item.productImages[0]" [alt]="item.productTitle" class="product-image" />
+          <div class="product-info">
+            <h4>{{ item.productTitle }}</h4>
+            <p><strong>Price:</strong> ₹{{ item.productPrice }}</p>
+            <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+

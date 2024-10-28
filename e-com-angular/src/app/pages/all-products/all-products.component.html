@@ -1,0 +1,31 @@
+
+
+
+<!-- src/app/pages/all-products/all-products.component.html -->
+<div class="products-container">
+    <h2 class="heading">All Products Created by Admin</h2>
+    <p *ngIf="error" class="error-message">{{ error }}</p>
+    <div *ngIf="products.length > 0" class="products-grid">
+      <div *ngFor="let product of products" class="product-card">
+        <img [src]="product.images" alt="{{ product.title }}" class="product-image" />
+        <div class="product-details">
+          <h3 class="product-title">{{ product.title }}</h3>
+          <p class="product-description">{{ product.description }}</p>
+          <p class="product-price">Price: ₹{{ product.price }}</p>
+          <p class="product-stock">Stock: {{ product.stock }}</p>
+          <p class="product-category">Category: {{ product.category }}</p>
+          <p class="product-brand">Brand: {{ product.brand }}</p>
+          <p class="product-color">Color: {{ product.color }}</p>
+          <p class="product-discount">Discount: {{ product.discount }}%</p>
+          <p class="product-size">Size: {{ product.size }}</p>
+          <p class="product-gender">Gender: {{ product.gender }}</p>
+          <div class="action-buttons">
+            <button (click)="editProduct(product._id)" class="btn update-btn">Update</button>
+            <button (click)="deleteProduct(product._id)" class="btn delete-btn">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p *ngIf="products.length === 0" class="no-products">No products available</p>
+  </div>
+  

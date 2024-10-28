@@ -1,0 +1,50 @@
+
+
+<!-- src/app/pages/edit-product/edit-product.component.html -->
+<div class="edit-product-container">
+    <h2>Edit Product</h2>
+    <form (ngSubmit)="submitChanges()" class="edit-product-form">
+      <div class="form-group" *ngFor="let field of ['title', 'description', 'price', 'images', 'stock', 'category', 'brand', 'color', 'discount']">
+        <label [for]="field">{{ field | titlecase }}</label>
+        <input
+          *ngIf="field !== 'description'"
+          [type]="field === 'price' || field === 'stock' || field === 'discount' ? 'number' : 'text'"
+          [id]="field"
+          [(ngModel)]="formData[field]"
+          [name]="field"
+          (input)="handleInputChange($event, field)"
+          required
+        />
+        <textarea
+          *ngIf="field === 'description'"
+          [id]="field"
+          [(ngModel)]="formData[field]"
+          [name]="field"
+          (input)="handleInputChange($event, field)"
+          required
+        ></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="size">Size</label>
+        <select id="size" [(ngModel)]="formData.size" name="size">
+          <option value="S">Small</option>
+          <option value="M">Medium</option>
+          <option value="L">Large</option>
+          <option value="XL">Extra Large</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select id="gender" [(ngModel)]="formData.gender" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="unisex">Unisex</option>
+        </select>
+      </div>
+  
+      <button type="submit" class="submit-btn">Save Changes</button>
+    </form>
+  </div>
+  

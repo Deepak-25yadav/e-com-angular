@@ -1,0 +1,19 @@
+
+  <nav class="navbar">
+    <div class="logo">
+      <a routerLink="/">Fashion-Zone</a>
+    </div>
+    <div class="nav-links">
+      <a routerLink="/">Home</a>
+      <a routerLink="/cart" class="cart-icon">
+        Cart
+        <span *ngIf="cartQuantity > 0" class="cart-badge">{{ cartQuantity }}</span>
+      </a>
+      <a routerLink="/order-history">Orders-History</a>
+      <button *ngIf="isAuthenticated" (click)="handleLogout()" class="logout-button">Logout</button>
+      <a *ngIf="!isAuthenticated" routerLink="/login">Login</a>
+    </div>
+  </nav>
+  
+
+

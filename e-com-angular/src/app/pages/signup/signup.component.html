@@ -1,0 +1,57 @@
+
+
+   <div class="signup-container">
+    <h2>Create an Account</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+      <div class="input-group">
+        <input formControlName="firstName" placeholder="First Name" required />
+      </div>
+      <div class="input-group">
+        <input formControlName="lastName" placeholder="Last Name" required />
+      </div>
+      <div class="input-group">
+        <input formControlName="mobile" placeholder="Mobile Number" required />
+      </div>
+      <div class="input-group">
+        <input formControlName="age" placeholder="Age" type="number" required />
+      </div>
+  
+      <div class="radio-group">
+        <label>Gender:</label>
+        <input type="radio" formControlName="gender" value="male" /> Male
+        <input type="radio" formControlName="gender" value="female" /> Female
+        <input type="radio" formControlName="gender" value="other" /> Other
+      </div>
+  
+      <div class="radio-group">
+        <label>Signup as:</label>
+        <input type="radio" formControlName="role" value="user" /> Buyer
+        <input type="radio" formControlName="role" value="admin" /> Seller
+      </div>
+  
+      <div class="input-group">
+        <input formControlName="email" placeholder="Email" required type="email" />
+      </div>
+  
+      <div class="password-container input-group">
+        <input formControlName="password" placeholder="Password" [type]="showPassword ? 'text' : 'password'" required />
+        <span class="toggle-password" (click)="togglePassword()">
+          {{ showPassword ? '👁️' : '🙈' }}
+        </span>
+      </div>
+  
+      <div class="password-container input-group">
+        <input formControlName="confirmPassword" placeholder="Confirm Password" [type]="showConfirmPassword ? 'text' : 'password'" required />
+        <span class="toggle-password" (click)="toggleConfirmPassword()">
+          {{ showConfirmPassword ? '👁️' : '🙈' }}
+        </span>
+      </div>
+  
+      <button type="submit" [disabled]="loading">{{ loading ? 'Creating Account...' : 'Sign Up' }}</button>
+    </form>
+    <p class="login-redirect">
+      Already have an account?
+      <a routerLink="/login">Login</a>
+    </p>
+  </div>
+  
