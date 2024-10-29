@@ -1,5 +1,5 @@
 export const environment = {
-    production: true,
+    production: false,
 
     // e-cart-backend >> localhost url means old or first repo of backend
 
