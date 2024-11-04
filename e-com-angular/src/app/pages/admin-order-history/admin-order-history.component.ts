@@ -1,10 +1,8 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 // import { environment } from 'src/environments/environment';
-import { environment } from 'environment/environment';
-import {jwtDecode} from 'jwt-decode';
+import { environment } from 'environments/environment';
+import { jwtDecode } from 'jwt-decode';
 
 interface CustomJwtPayload {
   userId: string;
@@ -83,10 +81,9 @@ export class AdminOrderHistoryComponent implements OnInit {
   }
 
   getTotalPrice(products: Product[]): number {
-    return products.reduce((total, item) => total + item.productPrice * item.quantity, 0);
+    return products.reduce(
+      (total, item) => total + item.productPrice * item.quantity,
+      0
+    );
   }
 }
-
-
-
-

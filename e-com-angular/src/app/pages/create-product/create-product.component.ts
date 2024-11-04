@@ -1,11 +1,9 @@
-
-
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 // import { environment } from 'src/environments/environment';
-import { environment } from 'environment/environment';
-import {jwtDecode} from 'jwt-decode'; // Make sure to install this library using `npm install jwt-decode`
+import { environment } from 'environments/environment';
+import { jwtDecode } from 'jwt-decode'; // Make sure to install this library using `npm install jwt-decode`
 
 interface CustomJwtPayload {
   userId: string;
@@ -30,7 +28,7 @@ interface ProductFormData {
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.css']
+  styleUrls: ['./create-product.component.css'],
 })
 export class CreateProductComponent {
   formData: ProductFormData = {
@@ -71,24 +69,22 @@ export class CreateProductComponent {
       return;
     }
 
-    this.http.post(`${this.baseUrl}/api/admin/createProduct`, this.formData, {
-      headers: { Authorization: `Bearer ${token}` },
-    }).subscribe({
-      next: (response: any) => {
-        this.success = 'Product created successfully';
-        this.error = '';
-        this.router.navigate(['/all-products']); // Redirect to all products page
-      },
-      error: (err) => {
-        console.error('Error creating product:', err);
-        this.error = err.error?.message || 'An error occurred. Please try again later.';
-        this.success = '';
-      }
-    });
+    this.http
+      .post(`${this.baseUrl}/api/admin/createProduct`, this.formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .subscribe({
+        next: (response: any) => {
+          this.success = 'Product created successfully';
+          this.error = '';
+          this.router.navigate(['/all-products']); // Redirect to all products page
+        },
+        error: (err) => {
+          console.error('Error creating product:', err);
+          this.error =
+            err.error?.message || 'An error occurred. Please try again later.';
+          this.success = '';
+        },
+      });
   }
 }
-
-
-
-
-

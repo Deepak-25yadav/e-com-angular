@@ -1,3 +1,5 @@
-<app-navbar *ngIf="userRole === 'user'"></app-navbar>
+
+<app-navbar *ngIf="userRole === 'user' || userRole === '' || userRole === null || userRole === undefined"></app-navbar>
 <app-admin-navbar *ngIf="userRole === 'admin'"></app-admin-navbar>
 <router-outlet></router-outlet>
+

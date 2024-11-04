@@ -1,8 +1,7 @@
-
 // src/app/pages/order-history/order-history.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environment/environment';
+import { environment } from 'environments/environment';
 import { jwtDecode } from 'jwt-decode';
 
 interface Order {
@@ -31,7 +30,7 @@ interface Order {
 @Component({
   selector: 'app-order-history',
   templateUrl: './order-history.component.html',
-  styleUrls: ['./order-history.component.css']
+  styleUrls: ['./order-history.component.css'],
 })
 export class OrderHistoryComponent implements OnInit {
   orders: Order[] = [];
@@ -52,17 +51,19 @@ export class OrderHistoryComponent implements OnInit {
   }
 
   fetchOrderHistory(): void {
-    this.http.get(`${this.baseUrl}/api/cart/orderHistory/${this.userId}`).subscribe({
-      next: (response: any) => {
-        this.orders = response.orders || [];
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error fetching order history:', err);
-        this.error = 'Failed to fetch order history.';
-        this.loading = false;
-      }
-    });
+    this.http
+      .get(`${this.baseUrl}/api/cart/orderHistory/${this.userId}`)
+      .subscribe({
+        next: (response: any) => {
+          this.orders = response.orders || [];
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error('Error fetching order history:', err);
+          this.error = 'Failed to fetch order history.';
+          this.loading = false;
+        },
+      });
   }
 
   calculateTotalPrice(products: any[]): number {
@@ -77,5 +78,3 @@ export class OrderHistoryComponent implements OnInit {
     return address && Object.keys(address).length > 0;
   }
 }
-
-

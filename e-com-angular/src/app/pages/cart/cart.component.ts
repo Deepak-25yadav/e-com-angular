@@ -1,11 +1,9 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from 'environment/environment';
+import { environment } from 'environments/environment';
 import { ToastService } from 'src/app/services/toast.service'; // Assuming a custom toast service for notifications
 
 @Component({
@@ -45,8 +43,12 @@ export class CartComponent implements OnInit {
         const products = response?.cart?.products || [];
 
         // Split cart into available and not available items
-        this.availableItems = products.filter((item: any) => item.product.stock > 0);
-        this.notAvailableItems = products.filter((item: any) => item.product.stock === 0);
+        this.availableItems = products.filter(
+          (item: any) => item.product.stock > 0
+        );
+        this.notAvailableItems = products.filter(
+          (item: any) => item.product.stock === 0
+        );
 
         this.calculateTotalPrice();
         this.cartService.updateCartQuantity(this.calculateTotalQuantity());
@@ -56,12 +58,15 @@ export class CartComponent implements OnInit {
         console.error('Error fetching cart items:', error);
         this.toastService.showError('Error fetching cart details.');
         this.isLoading = false;
-      }
+      },
     });
   }
 
   calculateTotalPrice(): void {
-    this.totalPrice = this.availableItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+    this.totalPrice = this.availableItems.reduce(
+      (acc, item) => acc + item.product.price * item.quantity,
+      0
+    );
   }
 
   calculateTotalQuantity(): number {
@@ -69,40 +74,40 @@ export class CartComponent implements OnInit {
   }
 
   updateQuantity(productId: string, action: 'increase' | 'decrease'): void {
-    this.http.put(`${this.baseUrl}/api/cart/updateCartQuantity`, {
-      userId: this.userId,
-      productId,
-      action,
-    }).subscribe({
-      next: () => {
-        this.fetchCartItems(); // Refresh cart after updating quantity
-      },
-      error: (error) => {
-        console.error('Error updating cart quantity:', error);
-        this.toastService.showError('Error updating cart quantity.');
-      }
-    });
+    this.http
+      .put(`${this.baseUrl}/api/cart/updateCartQuantity`, {
+        userId: this.userId,
+        productId,
+        action,
+      })
+      .subscribe({
+        next: () => {
+          this.fetchCartItems(); // Refresh cart after updating quantity
+        },
+        error: (error) => {
+          console.error('Error updating cart quantity:', error);
+          this.toastService.showError('Error updating cart quantity.');
+        },
+      });
   }
 
   removeProduct(productId: string): void {
-    this.http.delete(`${this.baseUrl}/api/cart/removeFromCart`, {
-      body: { userId: this.userId, productId }
-    }).subscribe({
-      next: () => {
-        this.fetchCartItems(); // Refresh cart after removing item
-      },
-      error: (error) => {
-        console.error('Error removing product from cart:', error);
-        this.toastService.showError('Error removing product from cart.');
-      }
-    });
+    this.http
+      .delete(`${this.baseUrl}/api/cart/removeFromCart`, {
+        body: { userId: this.userId, productId },
+      })
+      .subscribe({
+        next: () => {
+          this.fetchCartItems(); // Refresh cart after removing item
+        },
+        error: (error) => {
+          console.error('Error removing product from cart:', error);
+          this.toastService.showError('Error removing product from cart.');
+        },
+      });
   }
 
   proceedToCheckout(): void {
     this.router.navigate(['/add-address']);
   }
 }
-
-
-
-

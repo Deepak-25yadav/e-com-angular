@@ -1,12 +1,10 @@
-
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from 'environment/environment';
+import { environment } from 'environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
   private baseUrl = environment.baseUrl;
@@ -44,11 +42,4 @@ export class CartService {
   clearCart(userId: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/api/cart/clearCart/${userId}`);
   }
-  
-
 }
-
-
-
-
-

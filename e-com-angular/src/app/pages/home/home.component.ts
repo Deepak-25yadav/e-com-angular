@@ -1,4 +1,3 @@
-
 // src/app/pages/home/home.component.ts
 
 import { Component, OnInit } from '@angular/core';
@@ -6,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environment/environment';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -44,26 +43,32 @@ export class HomeComponent implements OnInit {
       page: this.page.toString(),
     };
     const queryString = new URLSearchParams(query).toString();
-    this.http.get(`${this.baseUrl}/api/user/getAllProducts?${queryString}`).subscribe({
-      next: (response: any) => {
-        this.products = response.products;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error fetching products:', error);
-        this.isLoading = false;
-      },
-    });
+    this.http
+      .get(`${this.baseUrl}/api/user/getAllProducts?${queryString}`)
+      .subscribe({
+        next: (response: any) => {
+          this.products = response.products;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error fetching products:', error);
+          this.isLoading = false;
+        },
+      });
   }
 
   fetchCartItems(): void {
     const token = localStorage.getItem('token');
     if (token) {
       const decodeToken = JSON.parse(atob(token.split('.')[1]));
-      this.cartService.getCartItems(decodeToken.userId).subscribe((response: any) => {
-        this.cartItems = response.cart.products;
-        this.cartService.updateCartQuantity(this.calculateTotalQuantity(this.cartItems));
-      });
+      this.cartService
+        .getCartItems(decodeToken.userId)
+        .subscribe((response: any) => {
+          this.cartItems = response.cart.products;
+          this.cartService.updateCartQuantity(
+            this.calculateTotalQuantity(this.cartItems)
+          );
+        });
     }
   }
 
@@ -83,7 +88,7 @@ export class HomeComponent implements OnInit {
   }
 
   isProductInCart(productId: string): boolean {
-    return this.cartItems.some(item => item.product._id === productId);
+    return this.cartItems.some((item) => item.product._id === productId);
   }
 
   navigateToCart(): void {
@@ -101,7 +106,9 @@ export class HomeComponent implements OnInit {
     if (checked) {
       this.selectedCategories.push(value);
     } else {
-      this.selectedCategories = this.selectedCategories.filter((cat) => cat !== value);
+      this.selectedCategories = this.selectedCategories.filter(
+        (cat) => cat !== value
+      );
     }
     this.page = 1;
     this.fetchProducts();
@@ -118,7 +125,3 @@ export class HomeComponent implements OnInit {
     this.fetchProducts();
   }
 }
-
-
-
-

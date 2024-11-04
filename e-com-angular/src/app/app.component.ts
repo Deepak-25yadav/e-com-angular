@@ -11,8 +11,9 @@ export class AppComponent {
 
   constructor(private authService: AuthService) {
     this.authService.userRole.subscribe((role) => {
-      this.userRole = role;
+      this.userRole = role || ''; // Ensure userRole is never null or undefined
     });
   }
 }
+
 

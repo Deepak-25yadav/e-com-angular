@@ -1,16 +1,14 @@
-
-
 // src/app/pages/edit-product/edit-product.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from 'src/app/services/toast.service';
-import { environment } from 'environment/environment';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.css']
+  styleUrls: ['./edit-product.component.css'],
 })
 export class EditProductComponent implements OnInit {
   productId: string = '';
@@ -44,18 +42,20 @@ export class EditProductComponent implements OnInit {
 
   fetchProductDetails(): void {
     if (this.token) {
-      this.http.get(`${this.baseUrl}/api/admin/getProductById/${this.productId}`, {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
-      }).subscribe({
-        next: (data: any) => {
-          this.formData = data;
-        },
-        error: (error) => {
-          this.toastService.showError('Error fetching product details');
-        }
-      });
+      this.http
+        .get(`${this.baseUrl}/api/admin/getProductById/${this.productId}`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .subscribe({
+          next: (data: any) => {
+            this.formData = data;
+          },
+          error: (error) => {
+            this.toastService.showError('Error fetching product details');
+          },
+        });
     }
   }
 
@@ -65,21 +65,26 @@ export class EditProductComponent implements OnInit {
 
   submitChanges(): void {
     if (this.token) {
-      this.http.put(`${this.baseUrl}/api/admin/updateProduct/${this.productId}`, this.formData, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.token}`,
-        },
-      }).subscribe({
-        next: () => {
-          this.toastService.showSuccess('Product updated successfully');
-          this.router.navigate(['/all-products']);
-        },
-        error: () => {
-          this.toastService.showError('Error updating product');
-        }
-      });
+      this.http
+        .put(
+          `${this.baseUrl}/api/admin/updateProduct/${this.productId}`,
+          this.formData,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        )
+        .subscribe({
+          next: () => {
+            this.toastService.showSuccess('Product updated successfully');
+            this.router.navigate(['/all-products']);
+          },
+          error: () => {
+            this.toastService.showError('Error updating product');
+          },
+        });
     }
   }
 }
-
